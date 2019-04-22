@@ -1,0 +1,47 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script>
+        function redirectOnLoad() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (!urlParams.has('url')) {
+                document.getElementById('message').innerHTML = 'ERROR: URL query parameter is required';
+                return;
+            }
+            const url = decodeURI(urlParams.get('url'));
+            if (urlParams.has('message')) {
+                document.getElementById('message').innerHTML = urlParams.get('message');
+            }
+            const wait = urlParams.has('wait') ? urlParams.get('wait') : 0;
+            setTimeout(() => window.location = url, wait);
+        }
+    </script>
+    <style>
+    .center {
+        margin: auto;
+        position: absolute;
+        top: 43%;
+        left: 48%;
+        text-align: center;
+        font-size: 30px
+    }
+
+    .center-image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    </style>
+    <title id="title">Loading...</title>
+</head>
+
+<body onload="redirectOnLoad()">
+    <p id="message" class="center">Loading...</p>
+    <img  class="center-image" src="https://cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif" width="40" height="40" />
+</body>
+</html>
