@@ -17,6 +17,16 @@
             const wait = urlParams.has('wait') ? urlParams.get('wait') : 0;
             setTimeout(() => window.location = url, wait);
         }
+
+        function setupRedirect() {
+            if (/*@cc_on!@*/false) { // check for Internet Explorer
+                document.onfocusin = redirectOnLoad;
+                document.onfocusout = redirectOnLoad;
+            } else {
+                window.onfocus = redirectOnLoad;
+                window.onblur = redirectOnLoad;
+            }
+        }
     </script>
     <style>
     .center {
@@ -60,7 +70,7 @@
     <title id="title">Loading...</title>
 </head>
 
-<body onload="redirectOnLoad()">
+<body onload="setupRedirect()">
     <p id="message" class="center">Loading...</p>
     <div class="loader"></div>
 </body>
